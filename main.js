@@ -9,7 +9,7 @@ function countdown(element, minutes, seconds) {
                 node.disabled = false;
                 }
         //if the time is less than 5s then disable class
-        if(time<=5){
+        if(time<=20){
             document.getElementById("class-disable").style.opacity=.3;
             var childNodes = document.getElementById("class-disable").getElementsByTagName('*');
             for (var node of childNodes) {
@@ -24,7 +24,7 @@ function countdown(element, minutes, seconds) {
             var text = '<button class="btn btn-warning">Continue</button>';
             el.innerHTML = text;
             setTimeout(function() {
-                countdown('time',0,10);
+                countdown('time',0,30);
             }, 2000);
             clearInterval(interval);
             return;
@@ -38,10 +38,78 @@ function countdown(element, minutes, seconds) {
         time--;
     }, 1000);
 }
-countdown('time',0,10);
+countdown('time',0,30);
 
 var num=1;
 let selectedMoney=10;
+let color='';
+document.getElementById("green").onclick=()=>{
+    color=document.getElementById("green").innerHTML
+    console.log('color',color);
+};
+document.getElementById("voilet").onclick=()=>{
+    color=document.getElementById("voilet").innerHTML
+    console.log('color',color);
+};
+document.getElementById("red").onclick=()=>{
+    color=document.getElementById("red").innerHTML
+    console.log('color',color);
+};
+let number='';
+
+document.getElementById("0").onclick=()=>{
+    number=document.getElementById("0").innerHTML
+    console.log('color',number);
+};
+document.getElementById("1").onclick=()=>{
+    number=document.getElementById("1").innerHTML
+    console.log('color',number);
+};
+document.getElementById("2").onclick=()=>{
+    number=document.getElementById("2").innerHTML
+    console.log('color',number);
+};
+document.getElementById("3").onclick=()=>{
+    number=document.getElementById("3").innerHTML
+    console.log('color',number);
+};
+document.getElementById("4").onclick=()=>{
+    number=document.getElementById("4").innerHTML
+    console.log('color',number);
+};
+document.getElementById("5").onclick=()=>{
+    number=document.getElementById("5").innerHTML
+    console.log('color',number);
+};
+
+document.getElementById("6").onclick=()=>{
+    number=document.getElementById("6").innerHTML
+    console.log('color',number);
+};
+
+document.getElementById("6").onclick=()=>{
+    number=document.getElementById("6").innerHTML
+    console.log('color',number);
+};
+
+document.getElementById("7").onclick=()=>{
+    number=document.getElementById("7").innerHTML
+    console.log('color',number);
+};
+document.getElementById("8").onclick=()=>{
+    number=document.getElementById("8").innerHTML
+    console.log('color',number);
+};
+
+document.getElementById("9").onclick=()=>{
+    number=document.getElementById("9").innerHTML
+    console.log('color',number);
+};
+
+
+
+
+
 document.getElementById("ten").onclick=()=>{
     var num=1 ;
     document.getElementById("num").innerHTML=num;

@@ -35,22 +35,22 @@
       </div>
       <section id="class-disable">
       <div class="container-fluid three-btn">
-          <div class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Join Green</div>
-          <div class="btn btn-voilet" data-toggle="modal" data-target="#exampleModal">Join Voilet</div>
-          <div class="btn btn-red" data-toggle="modal" data-target="#exampleModal">Join Red</div>
+          <div class="btn btn-success" data-toggle="modal" data-target="#exampleModal" id="green">Join Green</div>
+          <div class="btn btn-voilet" data-toggle="modal" data-target="#exampleModal"  id="voilet">Join Voilet</div>
+          <div class="btn btn-red" data-toggle="modal" data-target="#exampleModal"  id="red">Join Red</div>
       </div>
       <div class="container number-button">
           <div class="row">
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">0</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">1</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">2</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">3</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">4</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">5</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">6</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">7</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">8</div>
-              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">9</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" id="0">0</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" id="1">1</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" id="2">2</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" id="3">3</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" id="4">4</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"  id="5">5</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" id="6">6</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"  id="7">7</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"  id="8">8</div>
+              <div class="col-md-2 mr-4 btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"  id="9">9</div>
           </div>
       </div>
     </section>
@@ -141,7 +141,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-              <button type="button" class="btn btn-primary">CONFIRM</button>
+              <button type="button" class="btn btn-primary" onclick="test()">CONFIRM</button>
             </div>
           </div>
         </div>
@@ -152,8 +152,21 @@
 });
       </script> -->
     <!-- Optional JavaScript; choose one of the two! -->
+    <script>
+    function test(){
+      let t=document.getElementById("sum").innerHTML
+      console.log('hi');
+    }
+    </script>
+    <script>
+     let tes=()=>{
+       let t=document.getElementById("color").innerHTML
+       console.log(t);
+     }
+
+    </script>
      <script src="main.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
