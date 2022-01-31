@@ -16,19 +16,19 @@
       </div>
       <div class="col-md-6">
         <p><i class="bi bi-stopwatch"></i> Count Down</p>
-     {{minutes}} :{{ seconds }}
+     {{minutes}} :  {{ s }} 
         <p id="time"></p>
       </div>
     </div>
   </div>
-  <section id="class-disable">
+  <section id="class-disable"  :style="{  opacity: [seconds<10 ?0.3:1]   }">
     <div class="container-fluid three-btn">
       <div
         class="btn btn-success"
         data-toggle="modal"
         data-target="#exampleModal"
         id="green"
-        @click="modal1 = 'block'"
+       @click="seconds<10 ? modal1 = 'none': modal1='block',coin='green'"
       >
         Join Green
       </div>
@@ -37,7 +37,7 @@
         data-toggle="modal"
         data-target="#exampleModal"
         id="voilet"
-        @click="modal1 = 'block'"
+        @click="seconds<10 ? modal1 = 'none': modal1='block', coin='voilet'"
       >
         Join Voilet
       </div>
@@ -46,7 +46,7 @@
         data-toggle="modal"
         data-target="#exampleModal"
         id="red"
-        @click="modal1 = 'block'"
+      @click="seconds<10 ? modal1 = 'none': modal1='block', coin='red'"
       >
         Join Red
       </div>
@@ -58,7 +58,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="0"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block',coin=0"
         >
           0
         </div>
@@ -67,7 +67,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="1"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block', coin=1"
         >
           1
         </div>
@@ -76,7 +76,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="2"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block' , coin=2"
         >
           2
         </div>
@@ -85,7 +85,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="3"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block', coin=3"
         >
           3
         </div>
@@ -94,7 +94,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="4"
-          @click="modal1 = 'block'"
+       @click="seconds<10 ? modal1 = 'none': modal1='block', coin=4"
         >
           4
         </div>
@@ -103,7 +103,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="5"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block', coin=5"
         >
           5
         </div>
@@ -112,7 +112,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="6"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block', coin=6"
         >
           6
         </div>
@@ -121,7 +121,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="7"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block', coin=7"
         >
           7
         </div>
@@ -130,7 +130,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="8"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block', coin=8"
         >
           8
         </div>
@@ -139,7 +139,7 @@
           data-toggle="modal"
           data-target="#exampleModal"
           id="9"
-          @click="modal1 = 'block'"
+          @click="seconds<10 ? modal1 = 'none': modal1='block', coin=9"
         >
           9
         </div>
@@ -301,7 +301,7 @@
           >
             CANCEL
           </button>
-          <button type="button" class="btn btn-primary" onclick="test()">
+          <button type="button" class="btn btn-primary" @click="test()">
             CONFIRM
           </button>
         </div>
@@ -318,40 +318,45 @@ export default {
     const modal1 = ref("none");
     const Total = ref(10);
     let time = ref({});
-    let seconds = ref(121);
+    let seconds = ref(30);
     let timer = ref(0);
     let minutes=ref(0);
+    let s=ref(0);
+    let coin=ref(1);
+    function test(){
+      console.log('hi',coin.value,total.value);
+    }
 
     //let updated=ref(0)
 
     function secondsToTime(secs) {
-        console.log('seconds',secs);
+     
         
       let hours = Math.floor(secs / (60 * 60 *60));
       //let divisor_for_minutes = secs % (60 * 60);
       minutes.value= Math.floor(secs / 60);
-      let s=seconds.value%60
+       s.value=seconds.value%60
   /*     let divisor_for_seconds = divisor_for_minutes % 60;
        seconds.value = Math.ceil(divisor_for_seconds); */
     
-       console.log('second2', seconds.value)
+ 
       let obj = {
         h: hours,
         m: minutes.value,
-        s: s,
+        s: s.value,
       };
       return obj;
     }
     let countDown = () => {
         time.value = secondsToTime(seconds.value);
         seconds.value = seconds.value - 1
-   
+        
 
-  
-   console.log(time.value);
+
       if (seconds.value==0) {
 
         clearInterval(timer.value);
+        s.value=0
       }
     };
     function startTimer() {
@@ -373,7 +378,10 @@ export default {
       Total,
       total,
       seconds,
-      minutes
+      minutes,
+      s,test,
+      coin
+
     };
   },
 };
