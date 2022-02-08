@@ -1,9 +1,12 @@
 <template>
+<div class="test">
   <div class="container-fluid balance_display">
     <p>Available balance: ₹ 0.00</p>
+    <router-link to="/Recharge">
     <div class="btn btn-primary">Recharge</div>
+    </router-link>
     <div class="btn btn-light">Trend</div>
-    <div class="btn btn-secondary">Reset</div>
+    <div class="btn btn-secondary" @click="open">Reset</div>
   </div>
   <div class="container emerd">
     <p>Emerd</p>
@@ -37,7 +40,7 @@
         data-toggle="modal"
         data-target="#exampleModal"
         id="voilet"
-        @click="seconds<10 ? modal1 = 'none': modal1='block', coin='voilet'"
+        @click="seconds<10 ? modal1 = 'none': modal1='block', coin='Violet'"
       >
         Join Voilet
       </div>
@@ -156,28 +159,26 @@
         <tr>
           <th scope="col">Period</th>
           <th scope="col">Price</th>
-          <th scope="col">Number</th>
+          <th scope="col">Group</th>
+          <th scope="col">Coin</th>
+
           <th scope="col">Result</th>
+    
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">20220124455</th>
-          <td>60048</td>
-          <td>8</td>
-          <td><button class="btn btn-success"></button></td>
-        </tr>
-        <tr>
-          <th scope="row">20220124454</th>
-          <td>60048</td>
-          <td>9</td>
-          <td><button class="btn btn-voilet"></button></td>
-        </tr>
-        <tr>
-          <th scope="row">20220124453</th>
-          <td>60048</td>
-          <td>6</td>
-          <td><button class="btn btn-red"></button></td>
+        <tr v-for="data in result" :key="data.id">
+          <th scope="row">2022012445{{(data.id)}}</th>
+          <td>{{data.amount}}</td>
+          <td v-if="data.cgroup.slice(2).length>2">
+          <button class="btn" :style="{background:[data.cgroup]}"></button>
+          </td>
+          <td v-else>{{data.cgroup}}</td>
+
+              <td>{{data.coin}}</td>
+              <td>Success</td>
+          <td><button class="btn" :style="{background:[data.coin]}"></button></td>
+                   
         </tr>
       </tbody>
     </table>
@@ -308,26 +309,44 @@
       </div>
     </div>
   </div>
+ </div> 
 </template>
    <script>
+import "vue-toast-notification/dist/theme-sugar.css";
 import { ref, computed } from "vue";
-
+import axios from 'axios'
 export default {
   setup() {
+     const toast = () => {
+        createToast('Wow, easy')
+    }
+    
+    
     const number = ref(1);
     const modal1 = ref("none");
     const Total = ref(10);
     let time = ref({});
-    let seconds = ref(30);
+    let seconds = ref(20);
     let timer = ref(0);
     let minutes=ref(0);
     let s=ref(0);
+    let result=ref([]);
     let coin=ref(1);
-    function test(){
-      console.log('hi',coin.value,total.value);
-    }
+  
+  
 
     //let updated=ref(0)
+
+
+    async function getrendomdata(){
+     await axios.get('http://localhost:3000/winner')
+     .then((response)=>{
+       result.value=response.data
+     }),(error)=>{
+       console.log(error);
+     }  
+     }
+
 
     function secondsToTime(secs) {
      
@@ -353,11 +372,18 @@ export default {
         
 
 
-      if (seconds.value==0) {
-
+      if (seconds.value==0){
+        
         clearInterval(timer.value);
         s.value=0
+        getrendomdata();
       }
+      if(seconds.value<10)
+      {
+        modal1.value='none';
+      }
+
+
     };
     function startTimer() {
       if (timer.value === 0 && seconds.value >= 0) {
@@ -379,12 +405,39 @@ export default {
       total,
       seconds,
       minutes,
-      s,test,
-      coin
+      s,
+      coin,
+      result,
+      toast
 
     };
   },
-};
+  methods:{
+         open(){
+  this.$toast.show(`money Locked`,{
+    type:'error'
+  })
+  setTimeout(this.$toast.clear, 1000);
+  },
+    async  test(){
+     this.modal1='none'
+     await axios.post('http://localhost:3000/lockmoney', {
+       coin:this.number,
+       group:this.coin,
+       amount:this.total,
+       username:'alexendra',
+       phoneNumber:'3040505505'
+    }) 
+ .then((response) => {
+  this.open();
+  console.log(response);
+}, (error) => {
+  console.log(error);
+});
+    }
+
+}
+}
 </script>
           
 

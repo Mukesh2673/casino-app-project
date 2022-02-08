@@ -1,4 +1,5 @@
 <template>
+<div class="test">
   <div class="container-fluid bg-info">
     <div class="row">
       <i
@@ -42,9 +43,11 @@
         {{ item }}
       </div>
     </div>
-    <br><br>
+    <br /><br />
   </div>
-  <div class="mt-5"><span style="margin-left:80px; color:gray">payment</span></div>
+  <div class="mt-5">
+    <span style="margin-left: 80px; color: gray">payment</span>
+  </div>
 
   <div class="mt-5 checkbox container">
     <div @click="currentid = 'wow'" class="row">
@@ -58,71 +61,95 @@
           }"
         ></i>
       </div>
-      
+
       <div class="col-10">wowPay</div>
     </div>
-      <div @click="currentid = 'paytm'" class="row mt-3">
-        <div class="col-2">
-          <i
-            class="fa fa-check"
-            aria-hidden="true"
-            :style="{
-              display: currentid == 'paytm' ? 'block' : 'none',
-              float: 'right',
-            }"
-          ></i>
-        </div>
-        <div class="col-10">Paytm</div>
+    <div @click="currentid = 'paytm'" class="row mt-3">
+      <div class="col-2">
+        <i
+          class="fa fa-check"
+          aria-hidden="true"
+          :style="{
+            display: currentid == 'paytm' ? 'block' : 'none',
+            float: 'right',
+          }"
+        ></i>
       </div>
+      <div class="col-10">Paytm</div>
+    </div>
 
-  <div @click="currentid = 'OceanPay'" class="row mt-3">
-        <div class="col-2">
-          <i
-            class="fa fa-check"
-            aria-hidden="true"
-            :style="{
-              display: currentid == 'OceanPay' ? 'block' : 'none',
-              float: 'right',
-            }"
-          ></i>
-        </div>
-        <div class="col-10">Ocean</div>
+    <div @click="currentid = 'OceanPay'" class="row mt-3">
+      <div class="col-2">
+        <i
+          class="fa fa-check"
+          aria-hidden="true"
+          :style="{
+            display: currentid == 'OceanPay' ? 'block' : 'none',
+            float: 'right',
+          }"
+        ></i>
       </div>
+      <div class="col-10">Ocean</div>
+    </div>
 
-
- <div @click="currentid = 'WinPay'" class="row mt-3">
-        <div class="col-2">
-          <i
-            class="fa fa-check"
-            aria-hidden="true"
-            :style="{
-              display: currentid == 'WinPay' ? 'block' : 'none',
-              float: 'right',
-            }"
-          ></i>
-        </div>
-        <div class="col-10">WinPay</div>
+    <div @click="currentid = 'WinPay'" class="row mt-3">
+      <div class="col-2">
+        <i
+          class="fa fa-check"
+          aria-hidden="true"
+          :style="{
+            display: currentid == 'WinPay' ? 'block' : 'none',
+            float: 'right',
+          }"
+        ></i>
       </div>
+      <div class="col-10">WinPay</div>
+    </div>
 
     <div class="mt-5 Recharge" @click="Recharge"><p>Recharge</p></div>
-
-
-
-    </div>
+  </div>
+ </div> 
 </template>
 <script>
 import { ref } from "@vue/reactivity";
+import { useRouter } from 'vue-router'
 
 export default {
-  setup() {
+   setup() {
+    const router=useRouter()
+
     const currentClass = ref("");
     const currentid = ref("");
     const amountlist = ref([500, 1000, 2000, 5000, 10000, 499999]);
     const data = ref("");
-      const Recharge=()=>{
-        console.log(currentid.value,data.value)
+    const Recharge = () => {
+      if(currentid.value&&data.value)
+      {
+ fetch('http://localhost:3000/create-checkout-session',{
+         method:"POST",
+         body:JSON.stringify({
+            PAYMENT:currentid.value,
+            amount:data.value
+           }),
+            headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+
+      }).then((response) =>{
+      console.log(response.json());
+}).catch((err)=>{
+console.log(err);
+});
+
+          //router.push('/');
       }
-    return { currentClass, amountlist, data, currentid,Recharge};
+      else{
+        alert('select  Amount and Payment methods')
+      }
+
+
+    };
+    return { currentClass, amountlist, data, currentid, Recharge };
   },
 };
 </script>
@@ -152,16 +179,16 @@ input[type="radio"] {
   -moz-appearance: none;
   appearance: none;
 }
-.Recharge{
-  display:flex;
+.Recharge {
+  display: flex;
   justify-content: center;
-  margin-left:30%;
-  background: #009688;;
+  margin-left: 30%;
+  background: #009688;
   height: 50px;
   margin-bottom: 150px;
-  }
-  .Recharge p{
-    color:white;
-    margin-top:10px;
-  }
+}
+.Recharge p {
+  color: white;
+  margin-top: 10px;
+}
 </style>
